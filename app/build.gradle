@@ -35,6 +35,8 @@ dependencies {
     implementation files('libs\\bcprov-jdk18on-172.jar')
     implementation files('libs\\RTI_EYH_INPRES_2022-2023.jar')
     implementation files('libs\\RTI_EYH_INPRES_2022-2023.jar')
+    implementation files('libs\\bcprov-jdk18on-172.jar')
+    implementation files('libs\\RTI_EYH_INPRES_2022-2023.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

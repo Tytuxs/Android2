@@ -28,20 +28,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button b = this.findViewById(R.id.buttonConnexion);
         b.setOnClickListener(this);
+
     }
 
 
     @Override
     public void onClick(View v) {
         if(v == this.findViewById(R.id.buttonConnexion)) {
-            System.out.println("OKOKKOKOKOKOKO");
+
             TextView username = this.findViewById(R.id.editTextUtilisateur);
             TextView mdp = this.findViewById(R.id.editTextMDP);
-            System.out.println(username.getText());
-            System.out.println(mdp.getText());
+
 
             try {
-                InetAddress ip = InetAddress.getByName("192.168.1.43");
+                InetAddress ip = InetAddress.getByName("192.168.0.5");
                 System.out.println(ip);
                 Socket s = new Socket(ip, 5056);
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());

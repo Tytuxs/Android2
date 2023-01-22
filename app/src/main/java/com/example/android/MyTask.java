@@ -1,7 +1,8 @@
 package com.example.android;
 
-import Classe.Utilisateur;
 import android.os.AsyncTask;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -15,23 +16,19 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import Classe.Utilisateur;
 
 
 public class MyTask extends AsyncTask<String,Void, Socket> {
-
     public Socket CSocket;
     private final ObjectInputStream ois;
     private final ObjectOutputStream oos;
-
 
     public MyTask(SocketHandler socketHandler){
         this.CSocket = socketHandler.getSocket();
         this.oos = socketHandler.getObjectOutputStream();
         this.ois = socketHandler.getObjectInputStream();
-
     }
-
 
     @Override
     protected Socket doInBackground(String... strings) {
