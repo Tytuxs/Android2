@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
+                SocketHandler socketHandler = new SocketHandler();
+
                 oos.writeObject("LOGIN");
                 Utilisateur utilisateur = new Utilisateur();
                 utilisateur.set_nomUser(username.getText().toString());
@@ -55,15 +57,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String reponse = (String) ois.readObject();
                 System.out.println(reponse);
 
+                Intent intent = new Intent(this, RechercheChambre.class);
+                //intent.putExtra("Socket",s);
+                finish();
+                startActivity(intent);
+
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
-            Intent intent = new Intent(this, RechercheChambre.class);
-            finish();
-            startActivity(intent);
+
 
 
         }

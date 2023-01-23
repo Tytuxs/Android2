@@ -10,7 +10,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="411dp"
         android:layout_height="43dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textViewResaChambre"
@@ -25,7 +26,8 @@
         android:layout_width="412dp"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textViewDateSouhait"
@@ -50,7 +52,8 @@
         android:layout_width="413dp"
         android:layout_height="61dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textViewNomClientRef"
@@ -76,7 +79,8 @@
         android:layout_width="410dp"
         android:layout_height="57dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textViewTypeChambre"
@@ -88,7 +92,7 @@
         <Spinner
             android:id="@+id/spinnerNbPersonne"
             android:layout_width="271dp"
-            android:layout_height="35dp"
+            android:layout_height="48dp"
             android:minHeight="48dp"
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
@@ -99,7 +103,8 @@
         android:layout_width="410dp"
         android:layout_height="62dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textViewCategorie"
@@ -111,7 +116,7 @@
         <Spinner
             android:id="@+id/spinnerCategorie"
             android:layout_width="370dp"
-            android:layout_height="30dp"
+            android:layout_height="48dp"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 
@@ -120,7 +125,8 @@
         android:layout_width="416dp"
         android:layout_height="72dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textViewNbNuits"
@@ -144,7 +150,8 @@
         android:layout_width="411dp"
         android:layout_height="82dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/buttonRecherche"

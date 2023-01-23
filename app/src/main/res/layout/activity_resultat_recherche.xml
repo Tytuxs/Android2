@@ -7,11 +7,12 @@
     tools:context=".ResultatRecherche">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewListChambre"
         android:layout_width="264dp"
         android:layout_height="368dp"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="50dp" />
 
     <TextView
         android:id="@+id/textViewResultatRecherche"
