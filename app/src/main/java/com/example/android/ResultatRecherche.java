@@ -1,13 +1,11 @@
 package com.example.android;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 /*
@@ -33,7 +31,7 @@ public class ResultatRecherche extends RecyclerView.Adapter<ResultatRecherche.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_resultat_recherche, parent, false);
-        RecyclerView recyclerViewListChambre = view.findViewById(R.id.recyclerViewListChambr);
+        RecyclerView recyclerViewListChambre = view.findViewById(R.id.recyclerViewListChambre);
         return new ViewHolder(view);
     }
 
@@ -52,7 +50,7 @@ public class ResultatRecherche extends RecyclerView.Adapter<ResultatRecherche.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.text_view);
+            //textView = itemView.findViewById(R.id.text_view);
         }
     }
 }

@@ -4,6 +4,7 @@ import Classe.Chambre;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,20 +16,23 @@ import Classe.ReserActCha;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.Vector;
 
 public class RechercheChambre extends AppCompatActivity implements View.OnClickListener{
-    TextView nom = this.findViewById(R.id.editTextName);
-    TextView date = this.findViewById(R.id.editTextDate);
-    Spinner spinnerNbPersonne = this.findViewById(R.id.spinnerNbPersonne);
-    Spinner spinnerCategorie = this.findViewById(R.id.spinnerCategorie);
-    TextView nbNuits = this.findViewById(R.id.editTextTextNbNuits);
 
-
+    Spinner spinnerNbPersonne;
+    Spinner spinnerCategorie;
+    SocketHandler socketHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_recherche_chambre);
+        spinnerNbPersonne = this.findViewById(R.id.spinnerNbPersonne);
+        spinnerCategorie = this.findViewById(R.id.spinnerCategorie);
+        socketHandler = getIntent().getParcelableExtra("socket");
 
         String[] dataNbPersonne = {"Simple", "Double", "Familiale"};
         ArrayAdapter<String> adapternbPersonne = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dataNbPersonne);
@@ -38,7 +42,7 @@ public class RechercheChambre extends AppCompatActivity implements View.OnClickL
         ArrayAdapter<String> adapterCategorie = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dataCategorie);
         spinnerCategorie.setAdapter(adapterCategorie);
 
-        Button buttonRecherche = this.findViewById(R.id.buttonConnexion);
+        Button buttonRecherche = this.findViewById(R.id.buttonRecherche);
         buttonRecherche.setOnClickListener(this);
 
     }
@@ -46,44 +50,35 @@ public class RechercheChambre extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
 
-        try {
-            Intent intent = new Intent(this, RechercheChambre.class);
-            SocketHandler s = intent.getParcelableExtra("socket");
-            ObjectOutputStream oos = s.getOos();
-            ObjectInputStream ois = s.getOis();
+        if(view == this.findViewById(R.id.buttonRecherche)) {
+            try {
+                System.out.println(socketHandler);
+                ObjectOutputStream oos = socketHandler.getOos();
+                ObjectInputStream ois = socketHandler.getOis();
 
-            oos.writeObject("BROOM");
-            ReserActCha resa = new ReserActCha() ;
+                TextView nom = this.findViewById(R.id.editTextName);
+                TextView date = this.findViewById(R.id.editTextDate);
+                TextView nbNuits = this.findViewById(R.id.editTextTextNbNuits);
 
-            resa.set_categorie(spinnerCategorie.getSelectedItem().toString());
-            resa.set_typeCha(spinnerNbPersonne.getSelectedItem().toString());
-            resa.set_nbNuits(Integer.parseInt(nbNuits.getText().toString()));
-            resa.set_date(date.getText().toString());
-            resa.set_persRef(nom.getText().toString());
+                oos.writeObject("BROOM");
+                ReserActCha resa = new ReserActCha();
 
-            oos.writeObject(resa);
+                resa.set_categorie(spinnerCategorie.getSelectedItem().toString());
+                resa.set_typeCha(spinnerNbPersonne.getSelectedItem().toString());
+                resa.set_nbNuits(Integer.parseInt(nbNuits.getText().toString()));
+                resa.set_date(date.getText().toString());
+                resa.set_persRef(nom.getText().toString());
 
-            Chambre chambre;
-            int compteur = 0;//sert a savoir si on a au moins un resultat
-            while (true) {
-                chambre = (Chambre) ois.readObject();
-                if (chambre == null)
-                    break;
-                else {
-                    Vector v = new Vector();
-                    /*v.add(chambre.get_numeroChambre());
-                    v.add(chambre.get_prixHTVA());
-                    JTable_Affichage.addRow(v);
-                    compteur++;*/
-                }
+                oos.writeObject(resa);
+
+                Intent intent = new Intent(this, ResultatRecherche.class);
+                intent.putExtra("socket",socketHandler);
+                finish();
+                startActivity(intent);
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
-
-
     }
 }

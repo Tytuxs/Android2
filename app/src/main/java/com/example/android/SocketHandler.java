@@ -2,22 +2,18 @@ package com.example.android;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 
 public class SocketHandler implements Parcelable{
-    private Socket Socket;
-    private ObjectOutputStream oos;
-    private ObjectInputStream ois;
+    private static Socket Socket;
+    private static ObjectOutputStream oos;
+    private static ObjectInputStream ois;
 
-    public SocketHandler(Socket s, ObjectOutputStream oos, ObjectInputStream ois){
-        this.Socket = s;
-        this.oos = oos;
-        this.ois = ois;
+    public SocketHandler(){
+
     }
 
     public SocketHandler(Parcel in) {
@@ -46,19 +42,27 @@ public class SocketHandler implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
     }
 
-    public ObjectOutputStream getOos() {
+    public static synchronized ObjectOutputStream getOos() {
         return oos;
     }
 
-    public void setOos(ObjectOutputStream oos) {
-        this.oos = oos;
+    public static synchronized void setOos(ObjectOutputStream flux) {
+        oos = flux;
     }
 
-    public ObjectInputStream getOis() {
+    public static synchronized ObjectInputStream getOis() {
         return ois;
     }
 
-    public void setOis(ObjectInputStream ois) {
-        this.ois = ois;
+    public static synchronized void setOis(ObjectInputStream flux) {
+        ois = flux;
+    }
+
+    public static synchronized Socket getSocket() {
+        return Socket;
+    }
+
+    public static synchronized void setSocket(java.net.Socket socket) {
+        Socket = socket;
     }
 }

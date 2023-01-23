@@ -1,12 +1,12 @@
 package com.example.android;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             try {
-                InetAddress ip = InetAddress.getByName("192.168.0.5");
+                InetAddress ip = InetAddress.getByName("192.168.1.43");
                 Socket s = new Socket(ip, 5056);
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
@@ -55,7 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String reponse = (String) ois.readObject();
                 System.out.println(reponse);
 
-                SocketHandler socketHandler = new SocketHandler(s, oos,ois);
+                SocketHandler socketHandler = new SocketHandler();
+                socketHandler.setSocket(s);
+                socketHandler.setOis(ois);
+                socketHandler.setOos(oos);
+                System.out.println(socketHandler.getSocket());
+                System.out.println(socketHandler.getOis());
+                System.out.println(socketHandler.getOos());
                 Intent intent = new Intent(this, RechercheChambre.class);
                 intent.putExtra("socket",socketHandler);
                 finish();
@@ -66,10 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
-
-
-
         }
     }
 }
