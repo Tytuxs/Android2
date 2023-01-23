@@ -1,56 +1,65 @@
 package com.example.android;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
-/*
-public class ResultatRecherche extends AppCompatActivity {
-    RecyclerView tabResultat = this.findViewById(R.id.textViewResultatRecherche));
+import java.util.Vector;
 
+import Classe.Chambre;
+
+public class ResultatRecherche extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private List<Chambre> list;
+    SocketHandler socketHandler;
+    ObjectOutputStream oos;
+    ObjectInputStream ois;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         setContentView(R.layout.activity_resultat_recherche);
+        try {
+            socketHandler = getIntent().getParcelableExtra("socket");
+            System.out.println(socketHandler);
+            oos = socketHandler.getOos();
+            ois = socketHandler.getOis();
 
-    }
-}
-*/
-
-public class ResultatRecherche extends RecyclerView.Adapter<ResultatRecherche.ViewHolder> {
-    private List<String> data;
-
-    public ResultatRecherche(List<String> data) {
-        this.data = data;
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_resultat_recherche, parent, false);
-        RecyclerView recyclerViewListChambre = view.findViewById(R.id.recyclerViewListChambre);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(data.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            //textView = itemView.findViewById(R.id.text_view);
+            Chambre chambre;
+            int compteur = 0;//sert a savoir si on a au moins un resultat
+            while (true) {
+                chambre = (Chambre) ois.readObject();
+                if (chambre == null)
+                    break;
+                else {
+                    list.add(chambre);
+                }
+            }
+            if(compteur == 0) {
+                oos.writeObject("Aucune");
+            }
+            else {
+                oos.writeObject("OK");
+            }
+            for (int i=0; i<list.size();i++) {
+                System.out.println(list.get(i).get_numeroChambre());
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        recyclerView = this.findViewById(R.id.recyclerViewListChambre);
     }
 }
