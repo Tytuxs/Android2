@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             try {
                 InetAddress ip = InetAddress.getByName("192.168.0.5");
-                System.out.println(ip);
                 Socket s = new Socket(ip, 5056);
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
