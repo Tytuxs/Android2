@@ -53,6 +53,7 @@ public class ResultatRecherche extends AppCompatActivity implements View.OnClick
                     break;
                 else {
                     list.add(chambre);
+                    compteur++;
                 }
             }
             if(compteur == 0) {
@@ -111,14 +112,14 @@ public class ResultatRecherche extends AppCompatActivity implements View.OnClick
                 String confirmation = (String) ois.readObject();
 
                 if (confirmation.equals("NOK")) {
-                    System.out.println("NOK");
+                    System.out.println("NOK + " + confirmation);
                 } else {
-                    System.out.println("OK");
+                    System.out.println("OK + " + confirmation);
                     ReserActCha reservation = (ReserActCha) ois.readObject();
                     System.out.println(reservation);
                 }
 
-                Intent intent = new Intent(this, RechercheChambre.class);
+                Intent intent = new Intent(this, MenuROMP.class);
                 intent.putExtra("socket",socketHandler);
                 finish();
                 startActivity(intent);

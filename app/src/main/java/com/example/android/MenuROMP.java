@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.Button;
 
 public class MenuROMP extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,6 +19,12 @@ public class MenuROMP extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_menu_romp);
         socketHandler = getIntent().getParcelableExtra("socket");
         System.out.println(socketHandler);
+
+        Button buttonBROOM = findViewById(R.id.buttonBROOM);
+        buttonBROOM.setOnClickListener(this);
+        Button buttonPROOM = findViewById(R.id.buttonPROOM);
+        buttonPROOM.setOnClickListener(this);
+
     }
 
     @Override
