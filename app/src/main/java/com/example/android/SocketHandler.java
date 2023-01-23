@@ -10,16 +10,19 @@ import java.net.Socket;
 
 
 public class SocketHandler implements Parcelable{
-    private static Socket Socket;
-    private static ObjectOutputStream oos;
-    private static ObjectInputStream ois;
+    private Socket Socket;
+    private ObjectOutputStream oos;
+    private ObjectInputStream ois;
 
-    public SocketHandler(){
-
+    public SocketHandler(Socket s, ObjectOutputStream oos, ObjectInputStream ois){
+        this.Socket = s;
+        this.oos = oos;
+        this.ois = ois;
     }
 
     public SocketHandler(Parcel in) {
     }
+
 
     public static final Creator<SocketHandler> CREATOR = new Creator<SocketHandler>() {
         @Override
@@ -33,42 +36,6 @@ public class SocketHandler implements Parcelable{
         }
     };
 
-    public static synchronized Socket getSocket(){
-        return Socket;
-    }
-    public static synchronized void setSocket(Socket socket){
-        Socket = socket;
-    }
-
-    public static synchronized ObjectInputStream getObjectInputStream(){
-        return ois;
-    }
-
-    public static synchronized ObjectOutputStream getObjectOutputStream(){
-        return oos;
-    }
-
-    public static synchronized void setObjectInputStream(ObjectInputStream objectInputStream){
-        ois = objectInputStream;
-    }
-
-    public static synchronized void setObjectOutputStream(ObjectOutputStream objectOutputStream){
-        oos = objectOutputStream;
-    }
-
-    public static synchronized void closeSocket() {
-        try {
-            Socket.close();
-            ois.close();
-            oos.close();
-            Socket = null;
-            ois = null;
-            oos = null;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -77,5 +44,21 @@ public class SocketHandler implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+    }
+
+    public ObjectOutputStream getOos() {
+        return oos;
+    }
+
+    public void setOos(ObjectOutputStream oos) {
+        this.oos = oos;
+    }
+
+    public ObjectInputStream getOis() {
+        return ois;
+    }
+
+    public void setOis(ObjectInputStream ois) {
+        this.ois = ois;
     }
 }
