@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android">
         <activity
+            android:name=".PayerReservation"
+            android:exported="false" />
+        <activity
+            android:name=".MenuROMP"
+            android:exported="false" />
+        <activity
             android:name=".ResultatRecherche"
             android:exported="false" />
         <activity
