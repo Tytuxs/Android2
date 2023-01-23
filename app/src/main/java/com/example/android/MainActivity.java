@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println(socketHandler.getSocket());
                 System.out.println(socketHandler.getOis());
                 System.out.println(socketHandler.getOos());
-                Intent intent = new Intent(this, RechercheChambre.class);
+                Intent intent = new Intent(this, MenuROMP.class);
                 intent.putExtra("socket",socketHandler);
                 finish();
                 startActivity(intent);
