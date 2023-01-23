@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android">
         <activity
+            android:name=".ValiderPaiement"
+            android:exported="false" />
+        <activity
+            android:name=".ListeReservationAPayer"
+            android:exported="false" />
+        <activity
             android:name=".AnnulerReservation"
             android:exported="false" />
         <activity

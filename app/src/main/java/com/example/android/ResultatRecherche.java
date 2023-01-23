@@ -82,8 +82,6 @@ public class ResultatRecherche extends AppCompatActivity implements View.OnClick
         this.listViewListeChambre.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                /*CheckedTextView v = (CheckedTextView) view;
-                Chambre chambre = (Chambre) listViewListeChambre.getItemAtPosition(i);*/
                 objet = (String) listViewListeChambre.getItemAtPosition(i);
             }
         });
