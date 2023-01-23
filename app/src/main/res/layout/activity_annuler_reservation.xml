@@ -30,12 +30,11 @@
         tools:layout_editor_absoluteX="1dp">
 
         <EditText
-            android:id="@+id/editTextTextPersonIdReservation"
+            android:id="@+id/editTextIdReservation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
