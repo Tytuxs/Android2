@@ -69,7 +69,6 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="Oli"
             tools:ignore="MissingConstraints" />
 
     </LinearLayout>
@@ -142,7 +141,6 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="2"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 

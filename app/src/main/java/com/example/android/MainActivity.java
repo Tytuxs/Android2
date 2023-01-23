@@ -28,9 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button b = this.findViewById(R.id.buttonConnexion);
         b.setOnClickListener(this);
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             try {
-                InetAddress ip = InetAddress.getByName("192.168.1.43");
+                InetAddress ip = InetAddress.getByName("192.168.0.5");
                 Socket s = new Socket(ip, 5056);
                 ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
@@ -63,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println(socketHandler.getOis());
                 System.out.println(socketHandler.getOos());
                 Intent intent = new Intent(this, MenuROMP.class);
-                intent.putExtra("socket",socketHandler);
+                //intent.putExtra("socket",socketHandler);
                 finish();
                 startActivity(intent);
 

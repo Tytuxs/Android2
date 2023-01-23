@@ -5,6 +5,8 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,6 +32,7 @@ public class RechercheChambre extends AppCompatActivity implements View.OnClickL
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_recherche_chambre);
+
         spinnerNbPersonne = this.findViewById(R.id.spinnerNbPersonne);
         spinnerCategorie = this.findViewById(R.id.spinnerCategorie);
         socketHandler = getIntent().getParcelableExtra("socket");
@@ -69,10 +72,16 @@ public class RechercheChambre extends AppCompatActivity implements View.OnClickL
                 resa.set_date(date.getText().toString());
                 resa.set_persRef(nom.getText().toString());
 
+                System.out.println("ICIIIIIIIIIIIIIII");
+                System.out.println(resa.get_categorie());
                 oos.writeObject(resa);
 
                 Intent intent = new Intent(this, ResultatRecherche.class);
+                System.out.println("Avant" + socketHandler);
+
                 intent.putExtra("socket",socketHandler);
+                System.out.println("Après" + socketHandler);
+
                 finish();
                 startActivity(intent);
 
