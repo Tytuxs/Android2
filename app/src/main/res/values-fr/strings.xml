@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="se_connecter">se connecter</string>
+    <string name="Utilisateur">Utilisateur</string>
+    <string name="MDP">Mot de passe</string>
+</resources>
